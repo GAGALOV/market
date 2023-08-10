@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+
+    
+</head>
+<body>
+    <header>
+        
+    </header>
+    <h1>Basket</h1>
+    <ul>
+        {% for item in basket_items %}
+            <li>
+                {{ item.product.name }} - {{ item.quantity }}
+                <form method="post" action="{% url 'buy_item' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Buy</button>
+                </form>
+                <form method="post" action="{% url 'remove_item' item.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        {% endfor %}
+    
+    
+</body>
+</html>
